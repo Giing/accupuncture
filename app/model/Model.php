@@ -14,7 +14,7 @@ class Model {
 	public static function all() {
 		$class = get_called_class();
 		$table =  strtolower($class);
-		$st = db()->prepare("select * from $table");
+		$st = db()->prepare("select * from public.$table");
 		$st->execute();
 		$list = array();
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
