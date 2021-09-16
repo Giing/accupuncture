@@ -1,0 +1,70 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body  {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: sans-serif;
+}
+header  { 
+	flex: 0 0 100px;
+	line-height: 100px;
+	background-color: chocolate;
+	padding: 20px;
+	border-bottom: solid 10px black;
+	text-transform: uppercase;
+	font-size: 2em;
+}
+nav {
+	flex: 0 0 60px;
+}
+nav li {
+	list-style-type: none;
+	display: inline-block;
+	margin: 0px 10px;
+	vertical-align: top;
+}
+nav li a:link, nav li a:visited {
+	display: block;
+	padding: 10px 20px;
+	background-color: black;
+	color: white;
+	transition: all 0.5s ease;
+	text-decoration: none;
+}
+nav li a:hover {
+	padding-top: 20px;
+}
+section {
+	flex: 1 1 auto;
+	padding: 30px;
+}
+table {
+	border-collapse: collapse;
+	margin: 20px 0px;
+}
+td {
+	border: solid 2px black;
+	padding: 5px 10px;
+}
+form {
+	margin: 30px 0px;
+}
+form p {
+	margin: 10px 0px;
+}
+label  {
+	display: inline-block;
+	width: 100px;
+}
+
+footer {
+	flex: 0 0 40px;
+	line-height: 40px;
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 0.8em;
+}

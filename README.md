@@ -1,2 +1,2 @@
 # accupuncture
-School project about the famous chinese medecine
+School project on the famous chinese medicine
