@@ -13,7 +13,7 @@ $pass = 'web';
 $host = "localhost";
 $db = "acudb";
 $db = new PDO("pgsql:host=$host; dbname=$db", $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-//$db->query("SET search_path TO beers;");
+$db->query("SET search_path TO acudb;");
 
 function db() { global $db; return $db; }
 

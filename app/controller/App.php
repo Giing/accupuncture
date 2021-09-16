@@ -6,4 +6,10 @@ class App {
 				(new $controller())->$action();
 		}
 	}
+	public function get($route, $controller, $action){
+		$this->route($route, $controller, $action, "GET");
+	}
+	public function post($route, $controller, $action){
+		$this->route($route, $controller, $action, "POST");
+	}
 }

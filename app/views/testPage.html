@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block content %}
+<p class="important">
+    Voici votre menu de la semaine:
+    <ul>
+        
+        {% for key,value in users %}
+            <li>{{key}} => {{value}}</li>
+        {% endfor %}
+        
+    </ul>
+</p>
+{% endblock %}
