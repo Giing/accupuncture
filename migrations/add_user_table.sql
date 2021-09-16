@@ -2550,7 +2550,7 @@ INSERT INTO public.symptPatho(idS, idP, aggr) VALUES
 DROP TABLE IF EXISTS public.user;
 CREATE TABLE public.user (
     idUser SERIAL, -- AUTO_INCREMENT,
-    mail character varying(100) 
+    email character varying(100) 
         COLLATE pg_catalog."fr_FR.utf8"
         NOT NULL,
     password character varying(100)
@@ -2559,4 +2559,4 @@ CREATE TABLE public.user (
   CONSTRAINT PK_user PRIMARY KEY (idUser)
 );
 
-INSERT INTO USER(mail, password) VALUES ('mathis','mdp')
+INSERT INTO public.USER(email, password) VALUES ('mathis','mdp')
