@@ -7,7 +7,7 @@ class SiteController extends BaseController {
 
 		try {
 
-			echo $this->view('home', ["Lundi" => "Pipi"]);
+			return ["Lundi" => "Pipi"];
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());

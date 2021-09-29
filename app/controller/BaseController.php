@@ -8,17 +8,29 @@ use Twig\Environment;
 class BaseController {
 
 
-    public function view($filename, $params=[]) {
+    public function view($filename, $params=[], $api=false) {
         try {
-            $loader = new FilesystemLoader('views');
-            $twig = new Environment($loader);
-            $view = $twig->load($filename . ".html");
-
-            return $view->render($params);
+            if($api) {
+                return $this->api($params);
+            } else {
+                return $this->twig($filename, $params);
+            }
 
         } catch(Exception $e) {
             die('Error ' . $e->getMessage());
         }
 
+    }
+
+    public function twig($filename, $params) {
+        $loader = new FilesystemLoader('views');
+        $twig = new Environment($loader);
+        $view = $twig->load($filename . ".html");
+
+        return $view->render($params);
+    }
+
+    public function api($params) {
+        return json_encode($params);
     }
 }

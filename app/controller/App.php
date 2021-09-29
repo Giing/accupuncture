@@ -1,15 +1,15 @@
 <?php
 class App {
-	public function route($route, $controller, $action, $method="GET") {
+	public function route($route, $controller, $action, $method="GET", $api=false) {
 		if($_SERVER["REQUEST_METHOD"] === $method) {
 			if (isset($_GET["route"]) && $_GET["route"] == $route)
-				(new $controller())->$action();
+				(new $controller())->$action($api);
 		}
 	}
-	public function get($route, $controller, $action){
-		$this->route($route, $controller, $action, "GET");
+	public function get($route, $controller, $action, $api=false){
+		$this->route($route, $controller, $action, "GET", $api);
 	}
-	public function post($route, $controller, $action){
-		$this->route($route, $controller, $action, "POST");
+	public function post($route, $controller, $action,$api=false){
+		$this->route($route, $controller, $action, "POST", $api);
 	}
 }
