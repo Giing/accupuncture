@@ -8,6 +8,7 @@ $app->get("liste", "SiteController", "listAll");
 $app->get("register","UserController","register");
 $app->post("register","UserController","addUser");
 $app->get("login","UserController","login");
+$app->get("logout","UserController","logout");
 $app->post("login","UserController","connect");
 
 
