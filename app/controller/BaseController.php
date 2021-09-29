@@ -11,7 +11,8 @@ class BaseController {
     public function view($filename, $params=[]) {
         try {
             $loader = new FilesystemLoader('views');
-            $twig = new Environment($loader);
+            $twig = new Environment($loader, ['debug' => true]);
+            $twig->addExtension(new \Twig\Extension\DebugExtension());
             $view = $twig->load($filename . ".html");
 
             return $view->render($params);
