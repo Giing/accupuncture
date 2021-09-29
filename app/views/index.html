@@ -22,8 +22,12 @@
 			<nav class="my-2 my-md-0 mr-md-3">
 				<a class="p-2 text-dark" href="#">Home</a>
 			</nav>
-			<a class="btn btn-outline-primary mx-3" href="?route=register">Sign up</a>
-			<a class="btn btn-outline-secondary mx-3" href="?route=login">Login</a>
+            {% if user %}
+                <a class="btn btn-outline-secondary mx-3" href="?route=logout">Logout</a>
+            {% else %}
+                <a class="btn btn-outline-primary mx-3" href="?route=register">Sign up</a>
+                <a class="btn btn-outline-secondary mx-3" href="?route=login">Login</a>
+            {% endif%}
 		</div>
 
         {% block content %}

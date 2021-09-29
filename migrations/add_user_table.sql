@@ -2547,8 +2547,8 @@ INSERT INTO public.symptPatho(idS, idP, aggr) VALUES
 (448, 113, false)
 ;
 
-DROP TABLE IF EXISTS public.user;
-CREATE TABLE public.user (
+DROP TABLE IF EXISTS public.users;
+CREATE TABLE public.users (
     idUser SERIAL, -- AUTO_INCREMENT,
     email character varying(100) 
         COLLATE pg_catalog."fr_FR.utf8"
