@@ -43,3 +43,7 @@ html {
 #content-wrapper img {
     width: 100%;
 }
+
+.sticky {
+    position : fixed;
+}

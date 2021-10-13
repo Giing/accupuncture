@@ -49,11 +49,15 @@ class SiteController extends BaseController {
 				$patho["keywords"] = array_unique($patho["keywords"]);
 				sort($patho["keywords"]);
 			}
-			return $this->view('listAll', ["pathologies" => $pathos,"symptomes" => $symptomes, "keywords" => $keywords]);
+			return $this->view('listAll', ["pathologies" => $pathos, "symptomes" => $symptomes, "keywords" => $keywords]);
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
+	}
+
+	public function search() {
+		return $this->view('search');
 	}
 }
 

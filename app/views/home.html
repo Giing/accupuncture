@@ -9,26 +9,11 @@
         <p class="lead">Deliver an online service allowing you to consult the list of symptoms of the main pathologies in acupuncture</p>
     </div>
 </div>
-<div id="content-wrapper">
-    <table>
-        <th>Pathologie</th>
-        <th>Symptomes</th>
-        {% for pathologie in pathologies %}
-            <tr>
-                <td>{{pathologie.desc}}</td>
-                <td>
-                    {% for symp in pathologie.symptomes %}
-                        <li>{{ symp.desc }}</li>
-                    {% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
 <p class="important">
     Voici votre menu de la semaine:
     <dl>
         <dt>Lundi</dt>
+        <dd>Lundi</dd>
         <dt>Mardi</dt>
         <dd>{{Mardi}}</dd>
         <dt>Mercredi</dt>
