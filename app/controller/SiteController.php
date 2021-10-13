@@ -27,16 +27,20 @@ class SiteController extends BaseController {
 				$patho["keywords"] = array();
 				$patho["symptomes"] = Symptome::getByPatho($patho["idp"]);
 				foreach($patho["symptomes"] as $symptome) {
-					$patho["keywords"] = array_merge((array)Keyword::getBySymptoms($symptome->ids), (array)$patho["keywords"]);
+					$patho["keywords"] = array_merge((array)Keywords::getBySymptoms($symptome->ids), (array)$patho["keywords"]);
 				}
 				$patho["keywords"] = array_unique($patho["keywords"]);
 				sort($patho["keywords"]);
 			}
-			return $this->view('listAll', ["pathologies" => $pathos]);
+			return $this->view('listAll', ["pathologies" => $pathos, "symptomes" => $symptomes, "keywords" => $keywords]);
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
+	}
+
+	public function search() {
+		return $this->view('search');
 	}
 }
 
