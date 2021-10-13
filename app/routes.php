@@ -6,6 +6,7 @@ $app = new App();
 $app->get("home", "SiteController", "index");
 
 $app->get("liste", "SiteController", "listAll");
+$app->get("listFiltered", "SiteController", "listFiltered");
 
 $app->get("register","UserController","register");
 $app->post("register","UserController","addUser");

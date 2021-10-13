@@ -2,9 +2,8 @@
 
 {% block content %}
 <div id="content-wrapper">
-    <!--{{ dump(pathologies) }}-->
     <form action="" method="get">
-        <input type="hidden" name="route" value="liste">
+        <input type="hidden" name="route" value="listFiltered">
         <select name="pathologies[]" id="pathologies" multiple>
             {% for pathologie in pathologies %}
                 <option value={{pathologie.idp}}>{{pathologie.desc}}</option>
@@ -45,8 +44,5 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
-<div>
-    {{dump(pathologies)}}
 </div>
 {% endblock %}

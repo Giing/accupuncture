@@ -14,7 +14,27 @@ class SiteController extends BaseController {
 			die('Error ' . $e->getMessage());
 		}
 	}
+	public function listFiltered() {
+		try {
+			$pathos = Pathologie::getPathosFiltered($_GET["pathologies"]);
+			print_r($pathos);
+			$symptomes = Symptome::all();
+			$keywords = Keywords::all();
+			foreach($pathos as &$patho){
+				$patho["keywords"] = array();
+				$patho["symptomes"] = Symptome::getSymptomesFiltered($patho["idp"],$_GET["symptomes"]);
+				/*foreach($path["symptomes"] as $symptome) {
+					$patho["keywords"] = array_merge((array)Keywords::getKeywordsFiltered($symptome->ids), (array)$patho["keywords"]);
+				}
+				$patho["keywords"] = array_unique($patho["keywords"]);
+				sort($patho["keywords"]);*/
+			}
+			return $this->view('listAll', ["pathologies" => $pathos,"symptomes" => $symptomes, "keywords" => $keywords]);
 
+		} catch(Exception $e) {
+			die('Error ' . $e->getMessage());
+		}
+	}
 	public function listAll() {
 		try {
 			$pathos = Pathologie::getAll();
@@ -24,12 +44,12 @@ class SiteController extends BaseController {
 				$patho["keywords"] = array();
 				$patho["symptomes"] = Symptome::getByPatho($patho["idp"]);
 				foreach($patho["symptomes"] as $symptome) {
-					$patho["keywords"] = array_merge((array)Keyword::getBySymptoms($symptome->ids), (array)$patho["keywords"]);
+					$patho["keywords"] = array_merge((array)Keywords::getBySymptoms($symptome->ids), (array)$patho["keywords"]);
 				}
 				$patho["keywords"] = array_unique($patho["keywords"]);
 				sort($patho["keywords"]);
 			}
-			return $this->view('listAll', ["pathologies" => $pathos]);
+			return $this->view('listAll', ["pathologies" => $pathos,"symptomes" => $symptomes, "keywords" => $keywords]);
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
