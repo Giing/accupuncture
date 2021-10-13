@@ -2,6 +2,9 @@
 
 class Keyword extends Model {
 
+	/***
+	 * @return array[String]
+	 */
     public static function getBySymptoms($idSymptom) {
 		$sql = "select k.name from public.keywords k
                 JOIN public.keySympt ks
@@ -16,7 +19,7 @@ class Keyword extends Model {
 			$h = new Keyword();
 			foreach($row as $field=>$value)
 				$h->$field = $value;
-			$list[] = $h;
+			$list[] = (string)$h->name;
 		}
 		return $list;
     }
