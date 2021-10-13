@@ -7,9 +7,7 @@ class UserController extends BaseController{
 	public function register() {
 		global $data;
 		try {
-
-			echo $this->view('register');
-
+			return $this->view('register');
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
@@ -18,9 +16,7 @@ class UserController extends BaseController{
 	public function login() {
 		global $data;
 		try {
-
-			echo $this->view('login');
-
+			return $this->view('login');
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
@@ -34,10 +30,10 @@ class UserController extends BaseController{
 			$user->password = $_POST["password"];
 			if($user->password == $_POST["confirmPassword"]) {
 				$user->insert();
-				echo $this->view('home');
+				return  $this->view('home');
 			}
 			else {
-				echo $this->view('register',["passwordIncorrect"=>true]);
+				return $this->view('register',["passwordIncorrect"=>true]);
 			}
 
 		} catch(Exception $e) {
@@ -50,10 +46,10 @@ class UserController extends BaseController{
 			global $data;
 			$data = User::getbyEmail($_POST["email"]);
 			if($data != null) {
-				echo $this->view('home');
+				return $this->view('home');
 			}
 			else {
-				echo $this->view('login',["passwordIncorrect"=>true]);
+				return $this->view('login',["passwordIncorrect"=>true]);
 			}
 
 		} catch(Exception $e) {

@@ -8,18 +8,12 @@ use Twig\Environment;
 class BaseController {
 
 
-    public function view($filename, $params=[], $api=false) {
+    public function view($filename, $params=[]) {
         try {
-            if($api) {
-                return $this->api($params);
-            } else {
-                return $this->twig($filename, $params);
-            }
-
+            return ['view' => $filename, 'params' => $params];
         } catch(Exception $e) {
             die('Error ' . $e->getMessage());
         }
-
     }
 
     public function twig($filename, $params) {

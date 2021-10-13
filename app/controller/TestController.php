@@ -3,9 +3,9 @@
 class TestController extends BaseController {
 
 	
-	public function index($api) {
+	public function index() {
 		try {
-			echo $this->view('home', ["Lundi" => "Papaille"], $api);
+			return $this->view('home', ["Lundi" => "Papaille"]);
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
