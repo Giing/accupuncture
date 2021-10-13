@@ -17,7 +17,6 @@ class ViewController {
             $result = $this->api($params);
         } else {
             $result = $this->twig($params, $filename);
-            print_r($result);
         }
         echo $result;
     }
