@@ -1,6 +1,6 @@
 <?php
 
-class Keyword extends Model {
+class Keywords extends Model {
 
     public static function getBySymptoms($idSymptom) {
 		$sql = "select k.name from public.keywords k
@@ -13,7 +13,7 @@ class Keyword extends Model {
 		$st->execute();
 		$list = array();
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
-			$h = new Keyword();
+			$h = new Keywords();
 			foreach($row as $field=>$value)
 				$h->$field = $value;
 			$list[] = $h;

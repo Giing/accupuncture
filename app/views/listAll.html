@@ -3,6 +3,24 @@
 {% block content %}
 <div id="content-wrapper">
     <!--{{ dump(pathologies) }}-->
+    <form action="" method="get">
+        <input type="hidden" name="route" value="liste">
+        <select name="pathologies[]" id="pathologies" multiple>
+            {% for pathologie in pathologies %}
+                <option value={{pathologie.idp}}>{{pathologie.desc}}</option>
+            {% endfor %}
+        </select>
+        <select name="symptomes[]" id="symptomes" multiple>
+            {% for symptome in symptomes %}
+                <option value={{symptome.ids}}>{{symptome.desc}}</option>
+            {% endfor %}
+        </select>
+        <select name="keywords[]" id="keywords" multiple>
+            {% for keyword in keywords %}
+                <option value={{keyword.idk}}>{{keyword.name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary mt-3">Filter</button>
     <table class="table">
         <th>Pathologie</th>
         <th>Symptomes</th>
