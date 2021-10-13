@@ -3,8 +3,6 @@
 
 
 class SiteController extends BaseController {
-
-	
 	public function index() {
 
 		try {
@@ -13,7 +11,7 @@ class SiteController extends BaseController {
 			foreach($pathos as &$patho){
 				$patho["symptomes"] = Symptome::getByPatho($patho["idp"]);
 			}
-			echo $this->view('home', ["pathologies" => $pathos, "Lundi" => $pathos]);
+			return $this->view('home', ["pathologies" => $pathos, "Lundi" => $pathos]);
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
@@ -26,12 +24,15 @@ class SiteController extends BaseController {
 			$symptomes = Symptome::all();
 			$keywords = Keywords::all();
 			foreach($pathos as &$patho){
+				$patho["keywords"] = array();
 				$patho["symptomes"] = Symptome::getByPatho($patho["idp"]);
 				foreach($patho["symptomes"] as $symptome) {
-					$symptome->keywords = Keywords::getBySymptoms($symptome->ids);
+					$patho["keywords"] = array_merge((array)Keyword::getBySymptoms($symptome->ids), (array)$patho["keywords"]);
 				}
+				$patho["keywords"] = array_unique($patho["keywords"]);
+				sort($patho["keywords"]);
 			}
-			echo $this->view('listAll', ["pathologies" => $pathos,"symptomes" => $symptomes,"keywords" => $keywords]);
+			return $this->view('listAll', ["pathologies" => $pathos]);
 
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
