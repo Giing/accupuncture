@@ -1,0 +1,19 @@
+RewriteEngine On
+
+RewriteBase /accupuncture/
+
+#RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png) [NC]
+RewriteCond %{REQUEST_FILENAME}       !-f
+RewriteCond %{REQUEST_FILENAME}       !-d
+RewriteRule ^app/api/(.*)              app/index.php?route=$1&api   [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME}       !-f
+RewriteCond %{REQUEST_FILENAME}       !-d
+RewriteRule ^app/(.*)                  app/index.php?route=$1       [QSA,L]
+
+# Add this line
+# RewriteRule ^appp/(.*)$ /app/?route=/$1 [L]
+# [P]
+
+# Continue only if the file/symlink/directory does not exist
+# RewriteRule (.*) index.php

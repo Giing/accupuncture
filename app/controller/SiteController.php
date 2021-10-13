@@ -4,15 +4,12 @@
 
 class SiteController extends BaseController {
 	public function index() {
-
 		try {
-
 			$pathos = Pathologie::getAll();
 			foreach($pathos as &$patho){
 				$patho["symptomes"] = Symptome::getByPatho($patho["idp"]);
 			}
 			return $this->view('home', ["pathologies" => $pathos, "Lundi" => $pathos]);
-
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}

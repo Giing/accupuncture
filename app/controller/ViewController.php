@@ -13,6 +13,8 @@ class ViewController {
     
         $result = NULL;
 
+        print_r($_GET);
+
         if($api) {
             $result = $this->api($params);
         } else {

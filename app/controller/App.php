@@ -14,6 +14,10 @@ class App {
 				$this->viewController->render((new $controller())->$action(), $api && array_key_exists("api", $_GET));
 			}
 		}
+
+		if($route == "notFound") {
+			header("HTTP/1.1 404 Not Found", true, 404);
+		}
 	}
 	public function get($route, $controller, $action, $api=false){
 		$this->route($route, $controller, $action, "GET", $api);

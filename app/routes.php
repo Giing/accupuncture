@@ -17,5 +17,5 @@ $app->post("login","UserController","connect");
 
 $app->get("test", "TestController", "index", true);
 
-
+$app->get("notFound", "TestController", "index");
 
