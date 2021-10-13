@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div id="content-wrapper">
+    <!--{{ dump(pathologies) }}-->
+    <table class="table">
+        <thead>
+            <th>Pathologie</th>
+            <th>Symptomes</th>
+            <th>Mots-clefs</th>
+        </thead>
+        <tbody>
+            {% for pathologie in pathologies %}
+                <tr>
+                    <td>{{pathologie.desc}}</td>
+                    <td>
+                        {% for symp in pathologie.symptomes %}
+                            <li>{{ symp.desc }}</li>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for keyword in pathologie.keywords %}
+                            <li>{{ keyword }}</li>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    {{dump(pathologies)}}
+</div>
+{% endblock %}

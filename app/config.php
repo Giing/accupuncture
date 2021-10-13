@@ -1,6 +1,6 @@
 <?php
 // Fichier qui gère la connexion à la base de données
-
+session_start();
 spl_autoload_register(function ($class) {
 	if (strpos($class, "Controller") !== false || $class == 'App')
 		include_once "controller/".$class.".php";

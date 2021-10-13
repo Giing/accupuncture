@@ -15,16 +15,4 @@ class BaseController {
             die('Error ' . $e->getMessage());
         }
     }
-
-    public function twig($filename, $params) {
-        $loader = new FilesystemLoader('views');
-        $twig = new Environment($loader);
-        $view = $twig->load($filename . ".html");
-
-        return $view->render($params);
-    }
-
-    public function api($params) {
-        return json_encode($params);
-    }
 }
