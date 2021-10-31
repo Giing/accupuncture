@@ -2559,4 +2559,4 @@ CREATE TABLE public.users (
   CONSTRAINT PK_user PRIMARY KEY (idUser)
 );
 
-INSERT INTO public.USER(email, password) VALUES ('mathis','mdp')
+INSERT INTO public.users(email, password) VALUES ('mathis','mdp')
