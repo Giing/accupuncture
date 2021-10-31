@@ -35,6 +35,7 @@ class SiteController extends BaseController {
 			die('Error ' . $e->getMessage());
 		}
 	}
+
 	public function listAll() {
 		try {
 			$pathos = Pathologie::getAll();
@@ -51,6 +52,62 @@ class SiteController extends BaseController {
 			}
 			return $this->view('listAll', ["pathologies" => $pathos, "symptomes" => $symptomes, "keywords" => $keywords]);
 
+		} catch(Exception $e) {
+			die('Error ' . $e->getMessage());
+		}
+	}
+
+
+
+
+	/* List and Filter all symptomes by main pathologies */
+
+	/**
+	 * List every main pathologies
+	 *
+	 * @return View
+	 *
+	 * @throws BadRequestHttpException
+	 */
+	public function listAllMainPathologies() {
+		try {
+			$main_pathologies = array_keys(require __DIR__ . "../static/pathoTypeName.php");
+			return $this->view('pathologies', ["main_pathologies" => $main_pathologies, "symptomes" => array()]);
+		} catch(Exception $e) {
+			die('Error ' . $e->getMessage());
+		}
+	}
+
+	/**
+	 * Search for every symptomes link to the main pathologies
+	 *
+	 * @return View
+	 *
+	 * @throws BadRequestHttpException
+	 */
+	public function listSymptomesByMainPathologies() {
+		
+		$results = array();
+		
+		try {
+			$main_pathologies = array_keys(require __DIR__ . "../static/pathoTypeSubName.php");
+			$key_types = array_keys(require __DIR__ . "../static/pathoTypeName.php");
+
+			$searched_pathologies = $_GET["main_pathologies"];
+			foreach($searched_pathologies as $searched_pathologie) {
+				$searched_types = $main_pathologies[$searched_pathologie];
+				
+				foreach($searched_types as $type) {
+					$pathos = Pathologie::getPathosFromType($key_types[$type]);
+
+					foreach($pathos as $patho) {
+						$symptomes = Symptome::getByPatho($patho->id);
+						$results = array_merge($results, $symptomes);
+					}
+				}
+			}
+
+			return $this->view('pathologies', ["main_pathologies" => $key_types, "symptomes" => array_unique($results)]);
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}

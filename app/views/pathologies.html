@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div id="content-wrapper">
+    <form action="" method="get">
+        <input type="hidden" name="route" value="listFiltered">
+        <select name="main_pathologies[]" id="main_pathologies" multiple>
+            {% for pathologie in main_pathologies %}
+                <option value={{pathologie}}>{{pathologie}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary mt-3">Filter</button>
+    </form>
+    <table class="table">
+        <thead>
+            <th>Symptomes</th>
+        </thead>
+        <tbody>
+            {% for symptome in symptomes %}
+                <tr>
+                    <td>{{symptome.desc}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
