@@ -10,7 +10,7 @@ $app->get("liste", "SiteController", "listAll");
 $app->get("listFiltered", "SiteController", "listFiltered");
 
 
-// List, Filter symptomes by main pathologies (Quetion 1.2.1)
+// List, Filter symptomes by main pathologies (Question 1.2.1)
 $app->get("listSymptomes", "SiteController", "listAllMainPathologies");
 $app->get("listFilteredSymptomes", "SiteController", "listSymptomesByMainPathologies");
 
