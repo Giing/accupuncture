@@ -1,24 +1,41 @@
 {% extends "index.html" %}
 
 {% block content %}
+
+
 <div id="content-wrapper">
     <form action="" method="get">
-        <input type="hidden" name="route" value="listFiltered">
-        <select name="main_pathologies[]" id="main_pathologies" multiple>
-            {% for pathologie in main_pathologies %}
-                <option value={{pathologie}}>{{pathologie}}</option>
+        <input type="hidden" name="route" value="listFilteredPathologies">
+        <select name="main_pathologie" id="main_pathologie">
+            {% for key in main_pathologies|keys %}
+                {% set selected = '' %}
+                {% if main_pathologies[key] == selected_pathologie %}
+                    {% set selected = 'selected' %}
+                {% endif %}
+                <option value={{main_pathologies[key]}} {{selected}}>{{key}} {{selected_pathologie}}</option>
             {% endfor %}
         </select>
+        {% if chars|length > 0 %}
+            <select name="selected_chars[]" id="selected_chars" multiple>
+                {% for char in chars %}
+                    {% set selected = '' %}
+                    {% if char in selected_chars %}
+                        {% set selected = 'selected' %}
+                    {% endif %}
+                    <option value={{char}} {{selected}}>{{char}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
         <button type="submit" class="btn btn-primary mt-3">Filter</button>
     </form>
     <table class="table">
         <thead>
-            <th>Symptomes</th>
+            <th>Pathologies</th>
         </thead>
         <tbody>
-            {% for symptome in symptomes %}
+            {% for patho in pathos %}
                 <tr>
-                    <td>{{symptome.desc}}</td>
+                    <td>{{patho.desc}}</td>
                 </tr>
             {% endfor %}
         </tbody>

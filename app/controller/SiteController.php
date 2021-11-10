@@ -71,8 +71,8 @@ class SiteController extends BaseController {
 	 */
 	public function listAllMainPathologies() {
 		try {
-			$main_pathologies = array_keys(require __DIR__ . "../static/pathoTypeName.php");
-			return $this->view('pathologies', ["main_pathologies" => $main_pathologies, "symptomes" => array()]);
+			$main_pathologies = require __DIR__ . "/../static/pathoTypeName.php";
+			return $this->view('pathologies', ["main_pathologies" => $main_pathologies, "chars" => array(), "pathos" => array()]);
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
@@ -85,29 +85,45 @@ class SiteController extends BaseController {
 	 *
 	 * @throws BadRequestHttpException
 	 */
-	public function listSymptomesByMainPathologies() {
+	public function listPathologiesByMainPathologies() {
 		
 		$results = array();
+		$chars = array();
 		
 		try {
-			$main_pathologies = array_keys(require __DIR__ . "../static/pathoTypeSubName.php");
-			$key_types = array_keys(require __DIR__ . "../static/pathoTypeName.php");
+			$main_pathologies = require __DIR__ . "/../static/pathoTypeSubType.php";
+			$key_types = require __DIR__ . "/../static/pathoTypeName.php";
+			$type_keys = array_flip($key_types);
 
-			$searched_pathologies = $_GET["main_pathologies"];
-			foreach($searched_pathologies as $searched_pathologie) {
-				$searched_types = $main_pathologies[$searched_pathologie];
+			$attribute_types = require __DIR__ . "/../static/pathoSubTypeName.php";
+			
+			$searched_pathologie = $_GET["main_pathologie"];
+			$searched_chars = $_GET["selected_chars"];
+			if($searched_pathologie) {
 				
-				foreach($searched_types as $type) {
-					$pathos = Pathologie::getPathosFromType($key_types[$type]);
-
-					foreach($pathos as $patho) {
-						$symptomes = Symptome::getByPatho($patho->id);
-						$results = array_merge($results, $symptomes);
+				$chars = array_merge($chars, $main_pathologies[$type_keys[$searched_pathologie]]);
+				
+				if(count($searched_chars) == 0) {
+					$searched_chars = $chars;
+				}
+				foreach($searched_chars as $char) {
+					if(!in_array($char, $chars)) {
+						$searched_chars = $chars;
+						break;
 					}
 				}
+
+				$pathos = Pathologie::getPathosFromTypeAndChars($searched_pathologie, $searched_chars);
+				$results = array_merge($results, $pathos);
 			}
 
-			return $this->view('pathologies', ["main_pathologies" => $key_types, "symptomes" => array_unique($results)]);
+			return $this->view('pathologies', [
+				"main_pathologies" => $key_types,
+				"selected_pathologie" => $searched_pathologie,
+				"chars" => $chars, 
+				"selected_chars" => $searched_chars,
+				"pathos" => array_unique($results, SORT_REGULAR)]
+			);
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
