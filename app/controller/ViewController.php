@@ -24,8 +24,8 @@ class ViewController {
     private function twig($params, $filename) {
         $loader = new FilesystemLoader('views');
         $twig = new Environment($loader);
+        $twig->addGlobal('session', $_SESSION);
         $view = $twig->load($filename . ".html");
-    
         return $view->render($params);
     }
     
