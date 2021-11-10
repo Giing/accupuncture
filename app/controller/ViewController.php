@@ -24,12 +24,13 @@ class ViewController {
     private function twig($params, $filename) {
         $loader = new FilesystemLoader('views');
         $twig = new Environment($loader);
+        $twig->addGlobal('session', $_SESSION);
         $view = $twig->load($filename . ".html");
-    
         return $view->render($params);
     }
     
     private function api($params) {
-        return json_encode($params);
+        header('Content-Type: application/json; charset=utf-8');
+        return json_encode($params, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
     }
 }
