@@ -2,13 +2,50 @@
 
 {% block content %}
 <div class="container">
-    <div class="form-row mt-2">
-        <div class="input-group input-group-lg col-md-12 mx-auto">
-            <input type="text" class="form-control" placeholder="Enter a keyword">
-            <div class="input-group-prepend">
-                <button class="btn btn-primary" type="submit">Search</button>
+    <form action="" method="POST">
+        <div class="form-row mt-2">
+            <div class="input-group input-group-lg col-md-12 mx-auto">
+                    <input name="search" type="text" class="form-control" placeholder="Enter a keyword (or keywords separated by ' ; ' )">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
             </div>
         </div>
+    </form>
+    <div>
+        {% if pathos is defined %}
+            {% if pathos is empty %}
+                <div class="row">
+                    <p class="col-12 text-center">
+                        Nothing was found
+                    </p>
+                </div>
+            {% else %}
+                <table class="table">
+                    <thead>
+                        <th>Pathologie</th>
+                        <th>Symptomes</th>
+                    </thead>
+                    <tbody>
+                        {% for pathologie in pathos %}
+                            <tr>
+                                <td>{{pathologie.desc}}</td>
+                                <td>
+                                    {% for symp in pathologie.symptomes %}
+                                        <li>{{ symp.desc }}</li>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for keyword in pathologie.keywords %}
+                                        <li>{{ keyword }}</li>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
     </div>
 </div>
 <div id="content-wrapper">

@@ -15,6 +15,7 @@ $app->get("listSymptomes", "SiteController", "listAllMainPathologies");
 $app->get("listFilteredSymptomes", "SiteController", "listSymptomesByMainPathologies");
 
 $app->get("search", "SiteController", "search");
+$app->post("search", "SiteController", "search");
 
 $app->get("register","UserController","register");
 $app->post("register","UserController","addUser");

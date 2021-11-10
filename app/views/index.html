@@ -20,19 +20,19 @@
 			<img src="../ressources/logo_tris.png" alt="logo">
 			<h5 class="my-0 mr-md-auto font-weight-normal">Actupuncture</h5>
 			<nav class="my-2 my-md-0 mr-md-3">
-				<a class="p-2 text-dark" href="?route=home">Home</a>
+				<a class="p-2 text-dark" href="home">Home</a>
 			</nav>
             <nav class="my-2 my-md-0 mr-md-3">
-				<a class="p-2 text-dark" href="?route=liste">Liste des pathologies</a>
+				<a class="p-2 text-dark" href="liste">Liste des pathologies</a>
 			</nav>
             {% if user %}
             <nav class="my-2 my-md-0 mr-md-3">
-				<a class="p-2 text-dark" href="?route=search">Rechercher</a>
+				<a class="p-2 text-dark" href="search">Rechercher</a>
 			</nav>
-                <a class="btn btn-outline-secondary mx-3" href="?route=logout">Logout</a>
+                <a class="btn btn-outline-secondary mx-3" href="logout">Logout</a>
             {% else %}
-                <a class="btn btn-outline-primary mx-3" href="?route=register">Sign up</a>
-                <a class="btn btn-outline-secondary mx-3" href="?route=login">Login</a>
+                <a class="btn btn-outline-primary mx-3" href="register">Sign up</a>
+                <a class="btn btn-outline-secondary mx-3" href="login">Login</a>
             {% endif%}
 		</div>
 
