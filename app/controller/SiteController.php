@@ -114,7 +114,31 @@ class SiteController extends BaseController {
 	}
 
 	public function search() {
-		return $this->view('search');
+		
+		if(isset($_GET["s"])) {
+			$results = array();
+
+			try {
+				$symptomes = htmlspecialchars($_GET["s"]);
+				$symptomes = explode(";", $symptomes);
+				foreach($symptomes as &$symptome) {
+					$symptome = "'" . $symptome . "'";
+				}
+				$symptomes = implode(",", $symptomes);
+				$pathos = Pathologie::getPathosBySymptoms($symptomes);
+				foreach($pathos as $patho) {
+					$patho->symptomes = Symptome::getByPatho($patho->idp);
+				}
+				$results = $pathos;
+
+				return $this->view('search', ["pathos" => $results]);
+				
+			} catch(Exception $e) {
+				die('Error ' . $e->getMessage());
+			}
+		} else {
+			return $this->view('search');
+		}
 	}
 }
 

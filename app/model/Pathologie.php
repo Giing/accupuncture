@@ -40,4 +40,23 @@ class Pathologie extends Model {
 		}
 		return $list;
     }
+
+	public static function getPathosBySymptoms($symptoms) {
+		$st = db()->prepare("select distinct p.idp, p.desc from public.patho p
+							join public.symptpatho sp
+								on sp.idp=p.idp
+							join public.symptome s
+								on s.ids=sp.ids
+							where s.desc in (" . $symptoms . ")");
+        //$st->bindValue(':symptoms', $symptoms);                             
+		$st->execute();
+		$list = array();
+		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
+			$h = new Pathologie();
+			foreach($row as $field=>$value)
+				$h->$field = $value;
+			$list[] = $h;
+		}
+		return $list;
+	}
 }
