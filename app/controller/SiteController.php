@@ -115,11 +115,11 @@ class SiteController extends BaseController {
 
 	public function search() {
 		
-		if(isset($_POST["search"])) {
+		if(isset($_GET["s"])) {
 			$results = array();
 
 			try {
-				$symptomes = htmlspecialchars($_POST["search"]);
+				$symptomes = htmlspecialchars($_GET["s"]);
 				$symptomes = explode(";", $symptomes);
 				foreach($symptomes as &$symptome) {
 					$symptome = "'" . $symptome . "'";

@@ -12,6 +12,7 @@ class App {
 		if($_SERVER["REQUEST_METHOD"] === $method) {
 			if (isset($_GET["route"]) && $_GET["route"] == $route) {
 				$this->viewController->render((new $controller())->$action(), $api && array_key_exists("api", $_GET));
+				exit;
 			}
 		}
 

@@ -30,6 +30,7 @@ class ViewController {
     }
     
     private function api($params) {
-        return json_encode($params);
+        header('Content-Type: application/json; charset=utf-8');
+        return json_encode($params, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
     }
 }
