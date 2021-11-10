@@ -98,6 +98,7 @@ class SiteController extends BaseController {
 			
 			$searched_pathologie = $_GET["main_pathologie"];
 			$searched_chars = $_GET["selected_chars"];
+
 			if($searched_pathologie) {
 				// Get all characteristics
 				$chars = array_merge($chars, $main_pathologies[$type_keys[$searched_pathologie]]);
@@ -120,6 +121,9 @@ class SiteController extends BaseController {
 
 				$pathos = Pathologie::getPathosFromTypeAndChars($searched_pathologie, $searched_chars);
 				$results = array_merge($results, $pathos);
+			} else {
+				$searched_pathologie = "";
+				$searched_chars = array();
 			}
 
 			return $this->view('pathologies', [
