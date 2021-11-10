@@ -94,23 +94,28 @@ class SiteController extends BaseController {
 			$main_pathologies = require __DIR__ . "/../static/pathoTypeSubType.php";
 			$key_types = require __DIR__ . "/../static/pathoTypeName.php";
 			$type_keys = array_flip($key_types);
-
 			$attribute_types = require __DIR__ . "/../static/pathoSubTypeName.php";
 			
 			$searched_pathologie = $_GET["main_pathologie"];
 			$searched_chars = $_GET["selected_chars"];
 			if($searched_pathologie) {
-				
+				// Get all characteristics
 				$chars = array_merge($chars, $main_pathologies[$type_keys[$searched_pathologie]]);
-				
-				if(count($searched_chars) == 0) {
-					$searched_chars = $chars;
-				}
-				foreach($searched_chars as $char) {
-					if(!in_array($char, $chars)) {
+
+				// Reset characteristics
+				if($searched_chars && is_array($searched_chars)) {
+					if(count($searched_chars) == 0) {
 						$searched_chars = $chars;
-						break;
 					}
+
+					foreach($searched_chars as $char) {
+						if(!in_array($char, $chars)) {
+							$searched_chars = $chars;
+							break;
+						}
+					}
+				} else {
+					$searched_chars = $chars;
 				}
 
 				$pathos = Pathologie::getPathosFromTypeAndChars($searched_pathologie, $searched_chars);

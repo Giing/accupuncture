@@ -30,14 +30,7 @@ class Pathologie extends Model {
     }
 
 	public static function getPathosFromTypeAndChars($type, $chars) {
-		$attribute_types = array(
-			"interne" => "i",
-			"externe" => "e",
-			"plein" => "p",
-			"vide" => "v",
-			"chaud" => "c",
-			"froid" => "f",
-		);
+		$attribute_types = require __DIR__ . "/../static/pathoSubTypeName.php";
 		$filter = "";
 		$i=0;
 		foreach($chars as $char) {
@@ -45,9 +38,8 @@ class Pathologie extends Model {
 				$filter = $filter."|";
 			}
 			$filter = $filter.$type.$attribute_types[$char];
-			$i+=1;
+			$i++;
 		}
-		print_r($query);
 		$query = "select * from public.patho p where p.type SIMILAR TO '%($filter)%' order by p.desc asc";
 		$st = db()->prepare($query);
 		$st->execute();
