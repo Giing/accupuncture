@@ -14,6 +14,14 @@ class SiteController extends BaseController {
 			die('Error ' . $e->getMessage());
 		}
 	}
+
+	/**
+	 * List filtered pathologies with their symmtomes and keywords
+	 *
+	 * @return View
+	 *
+	 * @throws BadRequestHttpException
+	 */
 	public function listFiltered() {
 		try {
 			$pathos = Pathologie::getPathosFiltered($_GET["pathologies"]);
@@ -36,6 +44,13 @@ class SiteController extends BaseController {
 		}
 	}
 
+	/**
+	 * List all pathologies with their symmtomes and keywords
+	 *
+	 * @return View
+	 *
+	 * @throws BadRequestHttpException
+	 */
 	public function listAll() {
 		try {
 			$pathos = Pathologie::getAll();
@@ -57,10 +72,7 @@ class SiteController extends BaseController {
 		}
 	}
 
-
-
-
-	/* List and Filter all symptomes by main pathologies */
+	/* List and Filter all pathologies by main pathologies */
 
 	/**
 	 * List every main pathologies
@@ -72,7 +84,7 @@ class SiteController extends BaseController {
 	public function listAllMainPathologies() {
 		try {
 			$main_pathologies = require __DIR__ . "/../static/pathoTypeName.php";
-			return $this->view('pathologies', ["main_pathologies" => $main_pathologies, "chars" => array(), "pathos" => array()]);
+			return $this->view('pathologies', ["main_pathologies" => $main_pathologies, "chars" => array(), "selected_chars" => array(), "pathos" => array()]);
 		} catch(Exception $e) {
 			die('Error ' . $e->getMessage());
 		}
@@ -138,6 +150,14 @@ class SiteController extends BaseController {
 		}
 	}
 
+
+	/**
+	 * Search through pathologies with keywords
+	 *
+	 * @return View
+	 *
+	 * @throws BadRequestHttpException
+	 */
 	public function search() {
 
 		if (isset($_SESSION["user"]) && $_SESSION["user"]) {

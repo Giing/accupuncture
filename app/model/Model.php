@@ -1,5 +1,6 @@
 <?php
 
+// Abstraction class for all models
 class Model {
 
 	public function __get($attr) {
