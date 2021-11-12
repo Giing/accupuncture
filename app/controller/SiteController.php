@@ -16,35 +16,6 @@ class SiteController extends BaseController {
 	}
 
 	/**
-	 * List filtered pathologies with their symmtomes and keywords
-	 *
-	 * @return View
-	 *
-	 * @throws BadRequestHttpException
-	 */
-	public function listFiltered() {
-		try {
-			$pathos = Pathologie::getPathosFiltered($_GET["pathologies"]);
-			print_r($pathos);
-			$symptomes = Symptome::all();
-			$keywords = Keywords::all();
-			foreach($pathos as &$patho){
-				$patho["keywords"] = array();
-				$patho["symptomes"] = Symptome::getSymptomesFiltered($patho["idp"],$_GET["symptomes"]);
-				/*foreach($path["symptomes"] as $symptome) {
-					$patho["keywords"] = array_merge((array)Keywords::getKeywordsFiltered($symptome->ids), (array)$patho["keywords"]);
-				}
-				$patho["keywords"] = array_unique($patho["keywords"]);
-				sort($patho["keywords"]);*/
-			}
-			return $this->view('listAll', ["pathologies" => $pathos,"symptomes" => $symptomes, "keywords" => $keywords]);
-
-		} catch(Exception $e) {
-			die('Error ' . $e->getMessage());
-		}
-	}
-
-	/**
 	 * List all pathologies with their symmtomes and keywords
 	 *
 	 * @return View
