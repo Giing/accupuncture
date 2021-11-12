@@ -43,3 +43,12 @@ html {
 #content-wrapper img {
     width: 100%;
 }
+@media print {
+    #header {
+        display: none !important;
+    }
+
+    td {
+        page-break-inside: avoid;
+    }
+}

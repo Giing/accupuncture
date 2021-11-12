@@ -12,7 +12,7 @@
                 {% if main_pathologies[key] == selected_pathologie %}
                     {% set selected = 'selected' %}
                 {% endif %}
-                <option value={{main_pathologies[key]}} {{selected}}>{{key}} {{selected_pathologie}}</option>
+                <option value={{main_pathologies[key]}} {{selected}}>{{key}}</option>
             {% endfor %}
         </select>
         {% if chars|length > 0 %}
