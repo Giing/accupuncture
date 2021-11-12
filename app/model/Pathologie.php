@@ -40,7 +40,11 @@ class Pathologie extends Model {
 			$filter = $filter.$type.$attribute_types[$char];
 			$i++;
 		}
-		$query = "select * from public.patho p where p.type SIMILAR TO '%($filter)%' order by p.desc asc";
+		if($filter == "") {
+			$query = "select * from public.patho p where p.type SIMILAR TO '%($type)%' order by p.desc asc";
+		}
+		else $query = "select * from public.patho p where p.type SIMILAR TO '%($filter)%' order by p.desc asc";
+
 		$st = db()->prepare($query);
 		$st->execute();
 		$list = array();
