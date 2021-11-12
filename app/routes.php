@@ -6,10 +6,8 @@ $app = new App();
 // home page
 $app->get("home", "SiteController", "index");
 
-// List, Filter pathologies (Requirements: 1.2.1)
+// List pathologies,symptoms, keywords (Requirements: 1.2.1)
 $app->get("liste", "SiteController", "listAll");
-$app->get("listFiltered", "SiteController", "listFiltered");
-
 
 // List, Filter pathologies with main pathologies and characteristics (Requirements: 1.2.2)
 $app->get("listMainPathologies", "SiteController", "listAllMainPathologies");
@@ -22,6 +20,7 @@ $app->get("search", "SiteController", "search", true);
 // Register
 $app->get("register","UserController","register");
 $app->post("register","UserController","addUser");
+
 // Log
 $app->get("login","UserController","login");
 $app->get("logout","UserController","logout");
