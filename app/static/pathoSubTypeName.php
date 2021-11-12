@@ -7,4 +7,5 @@ return array(
     "vide" => "v",
     "chaud" => "c",
     "froid" => "f",
+    "neant" => "n",
 );
