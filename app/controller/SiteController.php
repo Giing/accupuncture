@@ -108,8 +108,8 @@ class SiteController extends BaseController {
 			$type_keys = array_flip($key_types);
 			$attribute_types = require __DIR__ . "/../static/pathoSubTypeName.php";
 			
-			$searched_pathologie = $_GET["main_pathologie"];
-			$searched_chars = $_GET["selected_chars"];
+			$searched_pathologie = isset($_GET["main_pathologie"]) ? $_GET["main_pathologie"] : array();
+			$searched_chars = isset($_GET["selected_chars"]) ? $_GET["selected_chars"] : array();
 
 			if($searched_pathologie) {
 				// Get all characteristics
