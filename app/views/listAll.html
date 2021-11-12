@@ -6,6 +6,7 @@
         <thead>
             <th>Pathologie</th>
             <th>Symptomes</th>
+            <th>Mots-clefs</th>
         </thead>
         <tbody>
             {% for pathologie in pathologies %}
@@ -14,6 +15,11 @@
                     <td>
                         {% for symp in pathologie.symptomes %}
                             <li>{{ symp.desc }}</li>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for keyword in pathologie.keywords %}
+                            <li>{{ keyword }}</li>
                         {% endfor %}
                     </td>
                 </tr>
